@@ -21,3 +21,8 @@ User = db["User"]
 def create_user(userData: dict) -> str:
     user = User.insert_one(userData)
     return str(user.inserted_id)
+
+
+def get_user(username: str) -> str:
+    user = User.find_one({"username": username})
+    return str(user["password"])

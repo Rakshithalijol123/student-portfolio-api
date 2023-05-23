@@ -10,6 +10,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 # Any other imports which are not related to fastapi.
 import os
+import bcrypt
 
 # Folder based imports here
 from src.config import (
@@ -18,13 +19,16 @@ from src.config import (
 )
 from src.urls import (
     WELCOME_PATH,
-    USER_CREATE_PATH
+    USER_CREATE_PATH,
+    CHECK,
+    GET_USER
 )
 from src.utils.openapi import (
     _patch_http_validation_error,
     setup_swagger_auth
 )
 from src.database.interaction import (create_user)
+import src.database.interaction as db
 from src.models.requests import (
     UserDataModel
 )
@@ -95,6 +99,11 @@ def welcome():
     return {"msg": "Welcome to student-portfolio-api"}
 
 
+@app.get(CHECK)
+def check():
+    return {"data": "This is for checking"}
+
+
 @app.post(
     USER_CREATE_PATH,
     tags=["Credentials"],
@@ -104,6 +113,14 @@ def welcome():
 def create_new_user(userData: UserDataModel) -> UserDataModelResponse:
     inserted_id = create_user(dict(userData))
     return {"status": "OK", "inserted_id": inserted_id}
+
+
+@app.get(GET_USER)
+def get_user(username: str, password: str):
+    user_password = db.get_user(username)
+    check = bcrypt.checkpw(password.encode(
+        'utf-8'), user_password.encode('utf-8'))
+    return {"check": check}
 
 
 # --- WEB-SOCKETS ---
