@@ -1,7 +1,7 @@
 import os
 # --- About The App ---
 APP_NAME = os.getenv("APP_NAME", "STUDENT-PORTFOLIO-API")
-APP_DESCRIPTION = "API which contains industry standard folder structure"
+APP_DESCRIPTION = "STUDENT-PORTFOLIO-API which contains all functions of the app"
 
 # Local setup without services and auth. Defaults to false. Local must be set explicitly
 LOCAL_APP = bool(os.getenv("LOCAL_APP", 1))
