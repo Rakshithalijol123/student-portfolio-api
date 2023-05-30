@@ -1,10 +1,12 @@
 from .connection import (
     connect,
-    create_database
+    create_database,
 )
 import bcrypt
 
-client = connect("mongodb://localhost:27017")
+from src.config import MONGODB_URL
+
+client = connect(MONGODB_URL)
 db = create_database(client=client, db_name="STUDENT-PORTFOLIO-DATABASE")
 
 
