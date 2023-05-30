@@ -17,6 +17,13 @@ APP_WORKER = int(os.getenv("APP_WORKER", 1))
 # Endpoint to Swagger UI
 SWAGGER_ENDPOINT = os.getenv("SWAGGER_ENDPOINT", "/docs")
 
+# MONGODB URL
+NAME = "rakshithalijol"
+PASSWORD = "Rakshithalijol123"
+MONGODB_URL = f"mongodb+srv://{NAME}:{PASSWORD}@cluster0.xuaevf5.mongodb.net/test"
+
+# MONGODB_URL = "mongodb://localhost:27017"
+
 # --- JWT token details ---
 SECRET_KEY = secrets.token_hex(32)
 ALGORITHM = "HS256"
