@@ -76,7 +76,7 @@ def token(formData: OAuth2PasswordRequestForm = Depends()):
 
 
 app.include_router(credentials_router, prefix="/credentials",
-                   dependencies=[Depends(validate_token)])
+                   tags=["Credentials"], dependencies=[Depends(validate_token)])
 
 
 # --- WEB-SOCKETS ---
